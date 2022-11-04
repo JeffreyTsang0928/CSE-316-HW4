@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import AuthContext from '../auth'
 import Copyright from './Copyright'
-
+import MUIRegisterFailedModal from './MUIRegisterFailedModal';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -26,8 +26,6 @@ export default function RegisterScreen() {
             formData.get('password'),
             formData.get('passwordVerify')
         );
-
-        
     };
 
     return (
@@ -119,6 +117,7 @@ export default function RegisterScreen() {
                             </Grid>
                         </Grid>
                     </Box>
+                    <MUIRegisterFailedModal />
                 </Box>
                 <Copyright sx={{ mt: 5 }} />
             </Container>
