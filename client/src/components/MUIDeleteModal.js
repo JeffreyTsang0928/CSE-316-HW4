@@ -26,7 +26,7 @@ export default function MUIDeleteModal() {
         store.deleteMarkedList();
     }
     function handleCloseModal(event) {
-        store.unmarkListForDeletion();
+        store.hideModals();
     }
 
     return (
@@ -36,7 +36,7 @@ export default function MUIDeleteModal() {
             <Box sx={style}>
                 <div className="modal-dialog">
                 <header className="dialog-header">
-                    Delete the {name} Top 5 List?
+                    Delete the playlist {name}?
                 </header>
                 <div id="confirm-cancel-container">
                     <button
