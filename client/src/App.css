@@ -127,9 +127,10 @@ body {
 
 #list-selector-heading {
   position: absolute;
-  left: 0%;
+  /* z-index: 10; */
+  left: 25%;
   top: 0%;
-  width: 100%;
+  width: 50%;
   height: 10%;
   text-align: center;
   font-size: 24pt;
@@ -137,7 +138,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  pointer-events: none;
+
 }
 
 #add-list-button {
