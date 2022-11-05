@@ -11,7 +11,8 @@ export const AuthActionType = {
     LOGIN_USER: "LOGIN_USER",
     LOGOUT_USER: "LOGOUT_USER",
     REGISTER_USER: "REGISTER_USER",
-    REGISTER_USER_FAILED: "REGISTER_USER_FAILED"
+    REGISTER_USER_FAILED: "REGISTER_USER_FAILED",
+    CLOSE_MODAL: "CLOSE_MODAL"
 }
 
 function AuthContextProvider(props) {
@@ -71,12 +72,22 @@ function AuthContextProvider(props) {
                     response: payload.response
                 })
             }
+
+            case AuthActionType.CLOSE_MODAL: {
+                return setAuth({
+                    user: null,
+                    loggedIn: false,
+                    registerError: false,
+                    response: null
+                });
+            }
             default:
                 return auth;
         }
     }
 
     auth.getLoggedIn = async function () {
+        
         const response = await api.getLoggedIn();
         if (response.status === 200) {
             authReducer({
@@ -90,25 +101,30 @@ function AuthContextProvider(props) {
     }
 
     auth.registerUser = async function(firstName, lastName, email, password, passwordVerify) {
-        const response = await api.registerUser(firstName, lastName, email, password, passwordVerify);      
-        if (response.status === 200) {
-            console.log("status is 200!")
-            authReducer({
-                type: AuthActionType.REGISTER_USER,
-                payload: {
-                    user: response.data.user
-                }
-            })
-            history.push("/login");
-            auth.loginUser(email,password);
+        try{
+            const response = await api.registerUser(firstName, lastName, email, password, passwordVerify);
+            if (response.status === 200) {
+                console.log("status is 200!")
+                authReducer({
+                    type: AuthActionType.REGISTER_USER,
+                    payload: {
+                        user: response.data.user
+                    }
+                })
+                history.push("/login");
+                auth.loginUser(email,password);
+            }
+            else{
+                console.log("the status is not 200!");
+            }
         }
-        else {
-            console.log("found a 400 response!");
+        catch(error){
+            console.log(error.response.data.errorMessage);
             console.log("setting register failed in the auth store.");
             authReducer({
                 type: AuthActionType.REGISTER_USER_FAILED,
                 payload: {
-                    response: response.errorMessage
+                    response: error.response.data.errorMessage
                 }
             })
             console.log("done setting register failed in the auth store.");
@@ -137,6 +153,13 @@ function AuthContextProvider(props) {
             })
             history.push("/");
         }
+    }
+
+    auth.closeModal = function(){
+        authReducer({
+            type: AuthActionType.CLOSE_MODAL,
+            payload: null
+        })
     }
 
     auth.getUserInitials = function() {

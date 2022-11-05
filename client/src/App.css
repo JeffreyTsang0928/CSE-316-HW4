@@ -288,6 +288,7 @@ input {
   opacity: 1;
 }
 
+
 .modal-dialog {
   position: relative;
   max-width: 800px;
@@ -302,6 +303,28 @@ input {
 
 .modal-dialog > * {
   padding: 1rem;
+}
+
+.modal-north {
+  font-size:18pt;
+  font-weight: bold;
+}
+
+.modal-center{
+  padding-top: 1px;
+}
+
+.modal-south {
+  font-size: 16pt;
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+}
+
+.modal-button {
+  font-size: 16pt;
 }
 
 .modal-header,

@@ -17,10 +17,16 @@ const style = {
     p: 4,
 };
 
+
+
+
 export default function MUIRegisterFailedModal() {
     const { store } = useContext(GlobalStoreContext);
     const { auth } = useContext(AuthContext);
 
+    function handleConfirmRegisterFailed(){
+        auth.closeModal();
+    }
     
 
     return (
@@ -41,19 +47,13 @@ export default function MUIRegisterFailedModal() {
                     {auth.response}
                 </div>
             </div>
-            {/* <div className="modal-south">
+            <div className="modal-south">
                 <input type="button" 
                     id="remove-song-confirm-button" 
                     className="modal-button" 
-                    onClick={handleConfirmRemoveSong} 
-                    value='Confirm' />
-                <input 
-                    type="button" 
-                    id="remove-song-cancel-button" 
-                    className="modal-button" 
-                    onClick={handleCancelRemoveSong} 
-                    value='Cancel' />
-            </div> */}
+                    onClick={handleConfirmRegisterFailed} 
+                    value='Ok' />
+            </div>
         </div>
     </div>
             </Box>
