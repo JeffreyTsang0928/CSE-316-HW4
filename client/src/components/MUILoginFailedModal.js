@@ -23,7 +23,7 @@ const style = {
 export default function MUILoginFailedModal() {
     const { auth } = useContext(AuthContext);
 
-    function handleConfirmRegisterFailed(){
+    function handleConfirmLoginFailed(){
         auth.closeModal();
     }
     
@@ -50,7 +50,7 @@ export default function MUILoginFailedModal() {
                 <input type="button" 
                     id="remove-song-confirm-button" 
                     className="modal-button" 
-                    onClick={handleConfirmRegisterFailed} 
+                    onClick={handleConfirmLoginFailed} 
                     value='Ok' />
             </div>
         </div>
