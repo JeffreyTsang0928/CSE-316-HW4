@@ -12,6 +12,7 @@ export const AuthActionType = {
     LOGOUT_USER: "LOGOUT_USER",
     REGISTER_USER: "REGISTER_USER",
     REGISTER_USER_FAILED: "REGISTER_USER_FAILED",
+    LOGIN_USER_FAILED: "LOGIN_USER_FAILED",
     CLOSE_MODAL: "CLOSE_MODAL"
 }
 
@@ -20,6 +21,7 @@ function AuthContextProvider(props) {
         user: null,
         loggedIn: false,
         registerError: false,
+        loginError: false,
         response: null
     });
     const history = useHistory();
@@ -36,6 +38,7 @@ function AuthContextProvider(props) {
                     user: payload.user,
                     loggedIn: payload.loggedIn,
                     registerError: false,
+                    loginError: false,
                     response: null
                 });
             }
@@ -44,6 +47,7 @@ function AuthContextProvider(props) {
                     user: payload.user,
                     loggedIn: true,
                     registerError: false,
+                    loginError: false,
                     response: null
                 })
             }
@@ -52,6 +56,7 @@ function AuthContextProvider(props) {
                     user: null,
                     loggedIn: false,
                     registerError: false,
+                    loginError: false,
                     response: null
                 })
             }
@@ -60,6 +65,7 @@ function AuthContextProvider(props) {
                     user: payload.user,
                     loggedIn: true,
                     registerError: false,
+                    loginError: false,
                     response: null
                 })
             }
@@ -69,6 +75,7 @@ function AuthContextProvider(props) {
                     user: null,
                     loggedIn: false,
                     registerError: true,
+                    loginError: false,
                     response: payload.response
                 })
             }
@@ -78,8 +85,19 @@ function AuthContextProvider(props) {
                     user: null,
                     loggedIn: false,
                     registerError: false,
+                    loginError: false,
                     response: null
                 });
+            }
+
+            case AuthActionType.LOGIN_USER_FAILED: {
+                return setAuth({
+                    user: null,
+                    loggedIn: false,
+                    registerError: false,
+                    loginError: true,
+                    response: payload.response
+                })
             }
             default:
                 return auth;
@@ -132,15 +150,25 @@ function AuthContextProvider(props) {
     }
 
     auth.loginUser = async function(email, password) {
-        const response = await api.loginUser(email, password);
-        if (response.status === 200) {
+        try{
+            const response = await api.loginUser(email, password);
+            if (response.status === 200) {
+                authReducer({
+                    type: AuthActionType.LOGIN_USER,
+                    payload: {
+                        user: response.data.user
+                    }
+                })
+                history.push("/");
+            }
+        }
+        catch(error){
             authReducer({
-                type: AuthActionType.LOGIN_USER,
+                type: AuthActionType.LOGIN_USER_FAILED,
                 payload: {
-                    user: response.data.user
+                    response: error.response.data.errorMessage
                 }
             })
-            history.push("/");
         }
     }
 

@@ -20,8 +20,7 @@ const style = {
 
 
 
-export default function MUIRegisterFailedModal() {
-
+export default function MUILoginFailedModal() {
     const { auth } = useContext(AuthContext);
 
     function handleConfirmRegisterFailed(){
@@ -31,7 +30,7 @@ export default function MUIRegisterFailedModal() {
 
     return (
         <Modal
-            open={auth.registerError}
+            open={auth.loginError}
         >
             <Box sx={style}>
             <div
@@ -40,7 +39,7 @@ export default function MUIRegisterFailedModal() {
         data-animation="slideInOutLeft">
         <div className="modal-root" id='register-failed-root'>
             <div className="modal-north">
-                Registration failed
+                Login failed
             </div>
             <div className="modal-center">
                 <div className="modal-center-content">

@@ -5,6 +5,7 @@ import HomeWrapper from './HomeWrapper'
 import ListCard from './ListCard'
 import LoginScreen from './LoginScreen'
 import MUIDeleteModal from './MUIDeleteModal'
+import MUILoginFailedModal from './MUILoginFailedModal'
 import MUIRegisterFailedModal from './MUIRegisterFailedModal'
 import MUIEditSongModal from './MUIEditSongModal'
 import MUIRemoveSongModal from './MUIRemoveSongModal'
@@ -27,6 +28,7 @@ export {
     ListCard, 
     LoginScreen,
     MUIDeleteModal,
+    MUILoginFailedModal,
     MUIEditSongModal,
     MUIRemoveSongModal,
     MUIRegisterFailedModal,
