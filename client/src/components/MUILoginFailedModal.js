@@ -4,6 +4,8 @@ import AuthContext from '../auth';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import Alert from '@mui/material/Alert';
+import Button from '@mui/material/Button';
 
 const style = {
     position: 'absolute',
@@ -43,15 +45,14 @@ export default function MUILoginFailedModal() {
             </div>
             <div className="modal-center">
                 <div className="modal-center-content">
-                    {auth.response}
+                    <Alert severity="error">{auth.response}</Alert>
                 </div>
             </div>
             <div className="modal-south">
-                <input type="button" 
+                <Button variant='contained'
                     id="remove-song-confirm-button" 
-                    className="modal-button" 
-                    onClick={handleConfirmLoginFailed} 
-                    value='Ok' />
+                    className="modal-button"
+                    onClick={handleConfirmLoginFailed}>Ok</Button>
             </div>
         </div>
     </div>
