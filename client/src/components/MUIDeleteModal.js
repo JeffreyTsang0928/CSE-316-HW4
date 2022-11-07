@@ -34,11 +34,11 @@ export default function MUIDeleteModal() {
             open={store.listMarkedForDeletion !== null}
         >
             <Box sx={style}>
-                <div className="modal-dialog">
+                <div>
                 <header className="dialog-header">
                     Delete the playlist {name}?
                 </header>
-                <div id="confirm-cancel-container">
+                <div className="modal-south">
                     <button
                         id="dialog-yes-button"
                         className="modal-button"

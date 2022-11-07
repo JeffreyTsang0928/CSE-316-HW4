@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import GlobalStoreContext from '../store';
+import CurrentModal from '../store';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -9,7 +10,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    height: 200,
+    width: 300,
     bgcolor: 'background.paper',
     border: '2px solid #000',
     boxShadow: 24,
@@ -49,7 +51,7 @@ export default function MUIEditSongModal() {
 
     return (
         <Modal
-            open={store.listMarkedForDeletion !== null}
+            open={true}
         >
             <Box sx={style}>
             <div
@@ -79,7 +81,7 @@ export default function MUIEditSongModal() {
                         type="text" 
                         defaultValue={artist} 
                         onChange={handleUpdateArtist} />
-                    <div id="you-tube-id-prompt" className="modal-prompt">You Tube Id:</div>
+                    <div id="you-tube-id-prompt" className="modal-prompt">YouTube Id:</div>
                     <input 
                         id="edit-song-modal-youTubeId-textfield" 
                         className='modal-textfield' 

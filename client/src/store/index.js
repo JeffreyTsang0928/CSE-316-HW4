@@ -36,7 +36,7 @@ export const GlobalStoreActionType = {
 // WE'LL NEED THIS TO PROCESS TRANSACTIONS
 const tps = new jsTPS();
 
-const CurrentModal = {
+export const CurrentModal = {
     NONE : "NONE",
     DELETE_LIST : "DELETE_LIST",
     EDIT_SONG : "EDIT_SONG",
@@ -160,7 +160,7 @@ function GlobalStoreContextProvider(props) {
                 return setStore({
                     currentModal : CurrentModal.NONE,
                     idNamePairs: store.idNamePairs,
-                    currentList: payload,
+                    currentList: null,
                     currentSongIndex: -1,
                     currentSong: null,
                     newListCounter: store.newListCounter,
@@ -524,6 +524,10 @@ function GlobalStoreContextProvider(props) {
             type: GlobalStoreActionType.SET_LIST_NAME_EDIT_ACTIVE,
             payload: null
         });
+    }
+
+    store.clearTransactions = function () {
+        tps.clearAllTransactions();
     }
 
     return (
